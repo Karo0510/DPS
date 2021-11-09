@@ -23,7 +23,18 @@ button
 
 }
 
+span{
+    float: left;
+    border: solid 2px black;
+    width: 10px;
+    color:blue;
+    background-color: blue;
+}
+
+
+span
+
 button:hover {
     background-color: #2EE59D;
     box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
-  }
+}
