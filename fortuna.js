@@ -1,20 +1,24 @@
 
 var game = {
   zdobyte : 0,
-  zycia : 1,
+  zycia : 3,
 }
-//alert(data[0]['country']);
+
 var elem = document.getElementById("panstwa");
-//elem.innerHTML =data[0]['country'];
+lastLetter = 0;
+
+
+haslo = losuj_haslo();
+elem.innerHTML = haslo;
 
 //alert(data.length);
 //alert(data[0]['country'][2]);
 
 //alert(data[0]['country'].length);
 
-for (var i = data[0]['country'].length-1; i >= 0; i -= 1) 
+for (var i = haslo.length-1; i >= 0; i -= 1) 
 {
-    addElement("wrap", data[0]['country'][i]);
+    addElement("wrap", haslo[i]);
 }
 
 
@@ -39,7 +43,7 @@ function wyswietlInfo()
 function Ent(e)
 { 
     console.log(e)
-    if (e.key == "ArrowLeft") 
+    if (e.key == " ") 
     {
       Sprawdz_Litery();
     }
@@ -51,23 +55,74 @@ console.log(document.getElementsByClassName("mystyle"));
 
 //FUNKCJE
 
+function Sprawdz_Haslo(liter, haslo)
+{
+  if (liter == haslo)
+  {
+    return true;
+  }
+
+  return false;
+}
+
+function odslon_haslo()
+{
+  for (var i = 0; i < haslo.length; i+= 1)
+  {
+    document.getElementsByClassName("mystyle")[i].style.backgroundColor="white";
+  }
+}
+
 
 function Sprawdz_Litery()
 {
+  odp = false;
   var liter = document.getElementById("wpisz_litere").value;
 
-  for (var i = 0; i < data[0]['country'].length; i+= 1)
+  if (liter.length > 1)
   {
-    liter_h = data[0]['country'][i];
+    odp = Sprawdz_Haslo(liter, haslo);
 
-    if (liter == liter_h.toUpperCase())
+    if (odp)
     {
-        document.getElementsByClassName("mystyle")[i].style.backgroundColor="white";
+      odslon_haslo();
+      game.zycia += 5;
+      console.log(game.zycia);
+      return;
     }
-    //alert("blad");
+    else
+    {
+      game.zycia -= 1;
+      console.log(game.zycia);
+    }
   }
-  //alert(liter);
-  //alert(getRandomInt(10,20));
+  else
+  {
+    for (var i = 0; i < haslo.length; i+= 1)
+    {
+      liter_h = haslo[i]
+  
+      if (liter.toUpperCase() == liter_h.toUpperCase())
+      {
+          document.getElementsByClassName("mystyle")[i].style.backgroundColor="white";
+          lastLetter++;
+      }
+    }
+  }
+
+  if (game.zycia == 0)
+  {
+      odslon_haslo();
+  }
+
+  if (lastLetter == haslo.length)
+  {
+    game.zycia += 5;
+    lastLetter = 0;
+    game.zdobyte += 1;
+    console.log(game.zycia);
+  }
+ 
 }
 
 function insertAfter(Node, newNode) 
@@ -86,6 +141,12 @@ function addElement(mydiv, letter)
 
   newDiv.classList.add("mystyle");  
   console.log(newDiv)
+}
+
+function losuj_haslo()
+{
+    var i = getRandomInt(0, data.length);
+    return data[i]['country'];
 }
 
 

@@ -28,11 +28,10 @@ span{
     border: solid 2px black;
     width: 10px;
     color:blue;
-    background-color: blue;
+    background-color:blue;
 }
 
 
-span
 
 button:hover {
     background-color: #2EE59D;
