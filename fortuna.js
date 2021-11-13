@@ -31,7 +31,7 @@ haslo = losuj_haslo();
 
 for (var i = 0; i < haslo.length; i += 1) 
 {
-   addElement("wpisz_litere", haslo[i]);
+   addElement("window_text", haslo[i]);
 }
 
 //LISTENERS
@@ -125,7 +125,7 @@ function odslon_haslo()
 {
   for (var i = 0; i < haslo.length; i+= 1)
   {
-    document.getElementsByClassName("mystyle")[i].style.backgroundColor="white";
+    document.getElementsByClassName("mystyle")[i].innerHTML = haslo[i];
   }
 }
 
@@ -172,7 +172,7 @@ function Sprawdz_Litery()
   
       if (liter.toUpperCase() == liter_h.toUpperCase())
       {
-          document.getElementsByClassName("mystyle")[i].style.backgroundColor="white";
+          document.getElementsByClassName("mystyle")[i].innerHTML = liter_h;
           lastLetter++;
           letter_found = 1;
       }
@@ -182,7 +182,7 @@ function Sprawdz_Litery()
     if (letter_found == 0)
     {
       game.zycia -= 1;
-      wyswietlZycia(dz, game.zycia);
+      wyswietlZycia(dz, game.zycia, game.zdobyte);
       console.log(game.zycia);
     }
 
@@ -213,7 +213,7 @@ function insertAfter(Node, newNode)
 function addElement(mydiv, letter)
 { 
   newDiv = document.createElement("span");
-  newDiv.innerHTML = letter;
+  //newDiv.innerHTML = letter;
 
   my_div = document.getElementById(mydiv);
   document.body.insertBefore(newDiv, my_div);
