@@ -12,8 +12,11 @@ body {
 
 #wrap
 {
-    position: center;
-    border: solid 1px red;
+    position: relative;
+    float: left;
+    width: 100%;
+    border: 1px solid red;
+    display: inline;
 }
 
 #wpisz_litere
@@ -30,16 +33,16 @@ body {
     color: #2EE59D;
 }
 
+
 button
 {   
-    margin: auto auto;
     color: blue;
     box-sizing: inherit;
     background-size: 50px 50px;
     box-shadow: lawngreen;
     position: relative;
     font-size: 50px;
-    display: block;
+    display: inline;
 }
 
 #sprawdz

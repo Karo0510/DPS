@@ -4,13 +4,22 @@ var game = {
   zycia : 3,
 }
 
+dz = document.createElement("div");
+//dz.innerHTML = "zycia: "+game.zycia;
+par = document.getElementById("liczba_zyc").appendChild(dz);
+
+wyswietlZycia(dz, game.zycia);
+
+
+
+
 var elem = document.getElementById("panstwa");
 lastLetter = 0;
 
 
-//haslo = losuj_haslo();
-haslo = "Poland";
-elem.innerHTML = haslo;
+haslo = losuj_haslo();
+//zacznijNowaGre();
+//elem.innerHTML = haslo;
 
 //alert(data.length);
 //alert(data[0]['country'][2]);
@@ -24,28 +33,48 @@ elem.innerHTML = haslo;
 
 for (var i = 0; i < haslo.length; i += 1) 
 {
-   addElement("wrap", haslo[i]);
+   addElement("wpisz_litere", haslo[i]);
 }
 
 //LISTENERS
 
-document.getElementById("graj").addEventListener("click", Sprawdz_Litery); 
+document.getElementById("sprawdz").addEventListener("click", Sprawdz_Litery); 
 alert(game.zycia);
 
 document.getElementById("Autor").addEventListener("click", wyswietlInfo);
 document.getElementById("zamknij_okno").addEventListener("click", zamknijInfo);
 
-a = document.getElementById("okno_autor")
+document.getElementById("Nowa_gra").addEventListener("click", zacznijNowaGre);
+
+//a = document.getElementById("okno_autor")
+
+function wyswietlZycia(dz, liczba)
+{
+    dz.innerHTML = "zycia: "+liczba;
+}
+
+function zacznijNowaGre()
+{
+  game.zycia = 3;
+  
+  wyswietlZycia(dz, game.zycia);
+  
+  usun_haslo();
+  haslo = losuj_haslo();
+
+  for (var i = 0; i < haslo.length; i += 1) 
+  {
+    addElement("wpisz_litere", haslo[i]);
+  }
+}
 
 function wyswietlInfo()
 {
   var div = document.getElementById("okno_autor");
-  //div.style.display = div.style.display == "none" ? "block" : "none";
   div.style.display = "block";
   div.style.backgroundColor = "green"
   
   console.log(div)
-  //alert("Karolina Maciejewska 215808");
 }
 
 function zamknijInfo()
@@ -56,12 +85,10 @@ function zamknijInfo()
 }
 
 
-
-
 function Ent(e)
 { 
     console.log(e)
-    if (e.key == " ") 
+    if (e.key == "ArrowLeft") 
     {
       Sprawdz_Litery();
     }
@@ -92,8 +119,18 @@ function odslon_haslo()
 }
 
 
+function usun_haslo()
+{
+  for (var i = haslo.length -1; i >= 0; i-= 1)
+  {
+    document.getElementsByClassName("mystyle")[i].remove();
+    console.log(haslo[i]);
+  }
+}
+
 function Sprawdz_Litery()
 {
+  letter_found = 0;
   odp = false;
   var liter = document.getElementById("wpisz_litere").value;
 
@@ -124,8 +161,19 @@ function Sprawdz_Litery()
       {
           document.getElementsByClassName("mystyle")[i].style.backgroundColor="white";
           lastLetter++;
+          letter_found = 1;
       }
+
     }
+
+    if (letter_found == 0)
+    {
+      game.zycia -= 1;
+      wyswietlZycia(dz, game.zycia);
+      console.log(game.zycia);
+    }
+
+
   }
 
   if (game.zycia == 0)
@@ -168,7 +216,8 @@ function losuj_haslo()
 
 
 
-function getRandomInt(min, max) {
+function getRandomInt(min, max) 
+{
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min)) + min;
