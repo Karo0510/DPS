@@ -37,7 +37,7 @@ for (var i = 0; i < haslo.length; i += 1)
 //LISTENERS
 
 document.getElementById("sprawdz").addEventListener("click", Sprawdz_Litery); 
-alert(game.zycia);
+//alert(game.zycia);
 
 document.getElementById("Autor").addEventListener("click", wyswietlInfo);
 document.getElementById("zamknij_okno").addEventListener("click", zamknijInfo);
