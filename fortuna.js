@@ -72,6 +72,7 @@ function zacznijNowaGre()
 
   usun_haslo();
   haslo = losuj_haslo();
+  console.log(haslo);
 
   for (var i = 0; i < haslo.length; i += 1) 
   {
@@ -182,6 +183,10 @@ function Sprawdz_Litery()
     if (letter_found == 0)
     {
       game.zycia -= 1;
+      if (game.zycia <= 0)
+      {
+        game.zycia = 0;
+      }
       wyswietlZycia(dz, game.zycia, game.zdobyte);
       console.log(game.zycia);
     }
