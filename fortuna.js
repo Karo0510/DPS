@@ -8,9 +8,7 @@ dz = document.createElement("div");
 //dz.innerHTML = "zycia: "+game.zycia;
 par = document.getElementById("liczba_zyc").appendChild(dz);
 
-wyswietlZycia(dz, game.zycia);
-
-
+wyswietlZycia(dz, game.zycia, game.zdobyte);
 
 
 var elem = document.getElementById("panstwa");
@@ -48,17 +46,30 @@ document.getElementById("Nowa_gra").addEventListener("click", zacznijNowaGre);
 
 //a = document.getElementById("okno_autor")
 
-function wyswietlZycia(dz, liczba)
+function wyswietlZycia(dz, liczba_zyc, liczba_zdobytych)
 {
-    dz.innerHTML = "zycia: "+liczba;
+    dz.innerHTML = "zycia: "+liczba_zyc +" zdobyte: "+liczba_zdobytych;
+}
+
+function kontunuujGre()
+{
+  wyswietlZycia(dz, game.zycia, game.zdobyte);
+  usun_haslo();
+  haslo = losuj_haslo();
+
+  for (var i = 0; i < haslo.length; i += 1) 
+  {
+    addElement("wpisz_litere", haslo[i]);
+  }
 }
 
 function zacznijNowaGre()
 {
   game.zycia = 3;
+  game.zdobyte = 0;
   
-  wyswietlZycia(dz, game.zycia);
-  
+  wyswietlZycia(dz, game.zycia, game.zdobyte);
+
   usun_haslo();
   haslo = losuj_haslo();
 
@@ -142,7 +153,9 @@ function Sprawdz_Litery()
     {
       odslon_haslo();
       game.zycia += 5;
+      game.zdobyte +=1;
       console.log(game.zycia);
+      kontunuujGre();
       return;
     }
     else
@@ -186,6 +199,7 @@ function Sprawdz_Litery()
     game.zycia += 5;
     lastLetter = 0;
     game.zdobyte += 1;
+    kontunuujGre();
     console.log(game.zycia);
   }
  
