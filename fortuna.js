@@ -182,7 +182,7 @@ function Sprawdz_Litery()
     if (letter_found == 0)
     {
       game.zycia -= 1;
-      wyswietlZycia(dz, game.zycia);
+      wyswietlZycia(dz, game.zycia, game.zdobyte);
       console.log(game.zycia);
     }
 
@@ -201,6 +201,7 @@ function Sprawdz_Litery()
     game.zdobyte += 1;
     kontunuujGre();
     console.log(game.zycia);
+    wyswietlZycia(game.zycia, game.zdobyte);
   }
  
 }
