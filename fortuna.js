@@ -194,9 +194,10 @@ function Sprawdz_Litery()
 
   }
 
-  if (game.zycia == 0)
+  if (game.zycia <= 0)
   {
       odslon_haslo();
+      game.zycia = 0;
   }
 
   if (lastLetter == haslo.length)
