@@ -1,34 +1,66 @@
+html{
+    width: 100%;
+    height: 100%;
+}
+
 body { 
     height:100%;
-    width:100%; 
+    width:100%;
     background-image:url('panda.jpg');
+    background-size: auto;
 }
 
 #wrap
 {
-    position: relative;
-    float: left;
-    width: 100%;
-    height: 100%;
+    position: center;
     border: solid 1px red;
+}
 
+#wpisz_litere
+{
+    width: 300px;
+    height:50px;
+    font-size: 30px;
+    position: absolute;
+    margin: auto;
+}
+
+#haslo
+{
+    color: #2EE59D;
 }
 
 button
 {   
+    margin: auto auto;
     color: blue;
     box-sizing: inherit;
     background-size: 50px 50px;
     box-shadow: lawngreen;
-
+    position: relative;
+    font-size: 50px;
+    display: block;
 }
 
-span{
+#sprawdz
+{
+    position: relative;
+    float: left;
+    background-size: 50px 50px;
+}
+
+span
+{
+    margin: auto;
     float: left;
     border: solid 2px black;
-    width: 10px;
+    width: 50px;
+    height: 50px;
+    font-size: 40px;
+    text-align: center;
     color:blue;
     background-color:blue;
+    box-shadow: 4px 4px 3px yellow;
 }
 
 
@@ -36,4 +68,21 @@ span{
 button:hover {
     background-color: #2EE59D;
     box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+}
+
+#okno_autor
+{
+    float: bottom;
+    height: 60%;
+    width: 60%;
+    position: fixed;
+    display: none;
+    margin: auto;
+}
+
+#okno_autor button {
+    color: black;
+    position: absolute;
+    top: 0;
+    right: 0;
 }

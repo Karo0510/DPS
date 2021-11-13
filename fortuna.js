@@ -8,7 +8,8 @@ var elem = document.getElementById("panstwa");
 lastLetter = 0;
 
 
-haslo = losuj_haslo();
+//haslo = losuj_haslo();
+haslo = "Poland";
 elem.innerHTML = haslo;
 
 //alert(data.length);
@@ -16,11 +17,15 @@ elem.innerHTML = haslo;
 
 //alert(data[0]['country'].length);
 
-for (var i = haslo.length-1; i >= 0; i -= 1) 
+/*for (var i = haslo.length-1; i >= 0; i -= 1) 
 {
-    addElement("wrap", haslo[i]);
-}
+   addElement("wrap", haslo[i]);
+}*/
 
+for (var i = 0; i < haslo.length; i += 1) 
+{
+   addElement("wrap", haslo[i]);
+}
 
 //LISTENERS
 
@@ -28,15 +33,28 @@ document.getElementById("graj").addEventListener("click", Sprawdz_Litery);
 alert(game.zycia);
 
 document.getElementById("Autor").addEventListener("click", wyswietlInfo);
+document.getElementById("zamknij_okno").addEventListener("click", zamknijInfo);
+
+a = document.getElementById("okno_autor")
 
 function wyswietlInfo()
 {
-  var div = document.createElement("div"); //create new div
-  div.addEventListener("click", run); //bind click to new div
-  this.append(div); //append the new div to clicked div
-  this.removeEventListener("click", run); //remove the original click event
-  alert("Karolina Maciejewska 215808");
+  var div = document.getElementById("okno_autor");
+  //div.style.display = div.style.display == "none" ? "block" : "none";
+  div.style.display = "block";
+  div.style.backgroundColor = "green"
+  
+  console.log(div)
+  //alert("Karolina Maciejewska 215808");
 }
+
+function zamknijInfo()
+{
+  console.log("zamknij INfo function");
+  var div = document.getElementById("okno_autor");
+  div.style.display = "none";
+}
+
 
 
 
@@ -136,11 +154,10 @@ function addElement(mydiv, letter)
   newDiv.innerHTML = letter;
 
   my_div = document.getElementById(mydiv);
-  //document.body.insertBefore(newDiv, my_div);
-  insertAfter(my_div, newDiv);
+  document.body.insertBefore(newDiv, my_div);
+  //insertAfter(my_div, newDiv);
 
   newDiv.classList.add("mystyle");  
-  console.log(newDiv)
 }
 
 function losuj_haslo()
