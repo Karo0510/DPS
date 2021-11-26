@@ -1,8 +1,38 @@
 onmessage = function(e) {
     console.log('Worker: Message received from main script');
-    pesel = create_pesel(e.data[0],e.data[1], e.data[2], e.data[3]);
-    let validateResult = validate(pesel);
+    let validateResult = show_pesel(e.data[0],e.data[1], e.data[2]);
     postMessage(validateResult);
+}
+
+function show_pesel(last5numbers)
+{ 
+  console.log("show")
+  let peselArray = [];
+
+  for (int i = 30; i<150; i++)
+  {
+      year = 1900 + i;
+
+      for (int j = 1; j<13;j++)
+      {
+        month = j;
+      } 
+
+      for (let d=1; d<=new Date(year, month, 0).getDate(); d++)
+      {
+        day = d;
+
+        pesel = create_pesel(year, month, day, i);
+        let isCorrect = validate(pesel);
+
+        if (isCorrect)
+        {
+          peselArray.push(pesel);
+        }
+      }
+  }
+
+  return peselArray;
 }
 
 function create_pesel(year, month, day, pesel)
@@ -41,6 +71,14 @@ function create_pesel(year, month, day, pesel)
         day = '0' + day;
     }
 
+    
+    let numbersString = pesel.toString();
+
+    while(numbersString < 5)
+    {
+      numbersString = "0" + numbersString;
+    }
+
     return  year.substring(2, 4) + month + day + pesel;
 }
 
@@ -62,4 +100,3 @@ function validate(pesel)
     sum = sum % 10;
     return (10 - sum) % 10 === controlNumber;
 }
-
