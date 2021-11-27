@@ -1,7 +1,5 @@
 onmessage = function(e) {
-    console.log('Worker: Message received from main script');
-    let validateResult = show_pesel(e.data[0],e.data[1], e.data[2]);
-    postMessage(validateResult);
+    postMessage(show_pesel(e.data));
 }
 
 function show_pesel(last5numbers)
@@ -9,20 +7,20 @@ function show_pesel(last5numbers)
   console.log("show")
   let peselArray = [];
 
-  for (int i = 30; i<150; i++)
+  for (i = 30; i<150; i++)
   {
       year = 1900 + i;
 
-      for (int j = 1; j<13;j++)
+      for (j = 1; j<13;j++)
       {
         month = j;
       } 
 
-      for (let d=1; d<=new Date(year, month, 0).getDate(); d++)
+      for (d=1; d<=new Date(year, month, 0).getDate(); d++)
       {
         day = d;
 
-        pesel = create_pesel(year, month, day, i);
+        pesel = create_pesel(year, month, day, last5numbers);
         let isCorrect = validate(pesel);
 
         if (isCorrect)
@@ -71,15 +69,13 @@ function create_pesel(year, month, day, pesel)
         day = '0' + day;
     }
 
-    
-    let numbersString = pesel.toString();
 
-    while(numbersString < 5)
+    while(pesel.length < 5)
     {
-      numbersString = "0" + numbersString;
+      pesel = "0" + pesel;
     }
 
-    return  year.substring(2, 4) + month + day + pesel;
+    return  year.toString().substring(2, 4) + month + day + pesel;
 }
 
 
